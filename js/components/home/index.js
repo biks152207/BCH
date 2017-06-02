@@ -45,7 +45,10 @@ class Home extends Component {  // eslint-disable-line
         tab = <Chat />;
         break;
       case 'addProfile':
-        tab = <AddProfile />;
+        tab = <AddProfile type={'Enter'} />;
+        break;
+      case 'editProfile':
+        tab = <AddProfile type={'Update'} />
         break;
       case 'nearbyFriends':
         tab = <NearbyFriends />;
@@ -55,7 +58,7 @@ class Home extends Component {  // eslint-disable-line
     }
     return (
       <Container style={{ flex: 1 }}>
-        {(!(this.props.tabState === 'friends') && !(this.props.tabState === 'nearbyFriends') && !(this.props.tabState === 'notifications') && !(this.props.tabState === 'chat') && !(this.props.tabState === 'addProfile')) &&
+        {(!(this.props.tabState === 'friends') && !(this.props.tabState === 'nearbyFriends') && !(this.props.tabState === 'notifications') && !(this.props.tabState === 'chat') && !(this.props.tabState === 'addProfile') && !(this.props.tabState === 'editProfile')) &&
           <Header searchBar>
             <Item style={{ borderRadius: 6, backgroundColor: '#293F68' }}>
               <Icon name="search" style={{ color: '#fff' }} />
@@ -78,9 +81,9 @@ class Home extends Component {  // eslint-disable-line
             <Button onPress={() => this.props.selectTab('friends')}>
               <Icon name="people" style={(this.props.tabState === 'friends') ? styles.activeIcon : undefined} />
             </Button>
-            <Button onPress={() => this.props.selectTab('chat')}>
+            {/*<Button onPress={() => this.props.selectTab('chat')}>
               <Icon name="share" style={(this.props.tabState === 'chat') ? styles.activeIcon : undefined} />
-            </Button>
+            </Button>*/}
           </FooterTab>
         </Footer>
       </Container>

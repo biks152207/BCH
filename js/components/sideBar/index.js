@@ -76,6 +76,7 @@ class SideBar extends Component {
               <ListItem
                 button
                 thumbnail
+                onPress={() => { Actions.blankPage(); this.props.closeDrawer(); }}
                 style={styles.links}
               >
                 <Left>
@@ -113,14 +114,14 @@ class SideBar extends Component {
             <Text style={styles.favText}>OPTIONS</Text>
           </View>
           <List foregroundColor={'white'} >
-            <ListItem
+            {/*<ListItem
               button iconLeft
               onPress={() => { Actions.userSettings(); this.props.closeDrawer(); }}
               style={styles.links}
             >
               <Icon name="settings" style={{ color: '#fff' }} />
               <Text style={styles.linkText}>SETTINGS</Text>
-            </ListItem>
+            </ListItem>*/}
             <ListItem
               button iconLeft
               onPress={() => { Actions.home(); this.props.closeDrawer(); }}
@@ -129,14 +130,14 @@ class SideBar extends Component {
               <Icon name="ios-grid-outline" style={{ color: '#fff' }} />
               <Text style={styles.linkText} >HOME</Text>
             </ListItem>
-            <ListItem
+            {/*<ListItem
               button iconLeft
               onPress={() => { Actions.blankPage(); this.props.closeDrawer(); }}
               style={styles.links}
             >
               <Icon name="ios-keypad-outline" style={{ color: '#fff' }} />
               <Text style={styles.linkText}>BLANK PAGE</Text>
-            </ListItem>
+            </ListItem>*/}
             <ListItem
               button iconLeft
               onPress={() => { this.logoutUser(); this.props.closeDrawer(); }}

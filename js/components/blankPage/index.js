@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { Image, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { Container, Header, Content, Button, Icon, Left, Right, Body } from 'native-base';
+import { Container, Header, Content, Button, Icon, Left, Right, Body, Thumbnail, List, ListItem } from 'native-base';
 
 import { openDrawer } from '../../actions/drawer';
 // import HeaderContent from './../headerContent/';
 
 import styles from './styles';
-
+const profileImg = require('../../../images/profile.png');
+import { getItem } from '../helper/common';
 
 const headerLogo = require('../../../images/Header-Logo.png');
 
@@ -18,6 +19,19 @@ class BlankPage extends Component { // eslint-disable-line
     openDrawer: React.PropTypes.func,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: {}
+    }
+  }
+  componentDidMount() {
+    getItem('user')
+      .then((user) => {
+        console.log(user);
+        this.setState({profile: user})
+      })
+  }
 
   render() { // eslint-disable-line class-methods-use-this
     return (
@@ -37,7 +51,26 @@ class BlankPage extends Component { // eslint-disable-line
             </Button>
           </Right>
         </Header>
-        <Content />
+        <Content>
+          <Container>
+                <Content>
+                  <View style={{flex: 1, alignItems: 'center', marginTop: 10}}>
+                    <Thumbnail square size={50} source={profileImg} />
+                    <List>
+                        <ListItem>
+                            <Text style={styles.title}>First name:</Text><Text style={styles.data}>{this.state.profile.firstName}</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text style={styles.title}>Last name:</Text><Text style={styles.data}>{this.state.profile.lastName}</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text style={styles.title}>Email:</Text><Text style={styles.data}>{this.state.profile.email}</Text>
+                        </ListItem>
+                    </List>
+                  </View>
+                </Content>
+            </Container>
+        </Content>
       </Container>
     );
   }

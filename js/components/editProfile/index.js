@@ -120,7 +120,7 @@ const options = {
 
 
 
-class AddProfile extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -149,7 +149,6 @@ class AddProfile extends Component {
         "PictureUrl": null
       }
     };
-    console.log('props....', this.props);
     this.onChange = this.onChange.bind(this);
     this.onPress = this.onPress.bind(this);
   }
@@ -166,18 +165,7 @@ class AddProfile extends Component {
           userId: result.userId,
           profileId: 0
         }
-        if (this.props.type === 'Enter') {
-          this.setState({ profileForm: userInfo, tguid: result.tguid });
-        } else {
-          getItem('profile')
-            .then((profile) => {
-              const editingProfile = Object.assign({}, profile);
-              if (!editingProfile.PictureUrl) {
-                editingProfile.PictureUrl = null;
-              }
-              this.setState({tguid:result.tguid,  profileForm: editingProfile });
-            })
-        }
+        this.setState({ profileForm: userInfo, tguid: result.tguid });
       });
   }
 
@@ -186,16 +174,14 @@ class AddProfile extends Component {
     if (value) {
       this.setState({progress: true});
       const uri = `api/profiles?userId=${this.state.profileForm.userId}&tguid=${this.state.tguid}`;
+      console.log(uri, 'uri');
       HTTP(uri, 'POST', this.state.profileForm)
         .then((result) => {
+          console.log(result);
           return result.json();
         })
         .then((jsonResponse) => {
-          if (this.props.type === 'Enter') {
-            executeMsg('Successfully added new profile.');
-          } else {
-            executeMsg('Updated profile Successfully.');
-          }
+          executeMsg('Successfully added new profile.');
         })
         .catch((err) => {
         })
@@ -207,6 +193,7 @@ class AddProfile extends Component {
 
   render() {
     return (
+      <ScrollView>
         <Container>
           <Header>
             <Left>
@@ -215,17 +202,14 @@ class AddProfile extends Component {
               </Button>
             </Left>
             <Body style={{ flex: 1.5 }}>
-              {this.props.type == 'Enter' ?
-                <Title style={styles.header}>Add Profile</Title>:
-                <Title style={styles.header}>Update Profile</Title>
-              }
+              <Title style={styles.header}>Add Profile</Title>
             </Body>
             <Right>
             </Right>
           </Header>
           <Content style={{margin: 20}}>
               <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={{fontSize: 20, padding: 10}}>{this.props.type} your profile information</Text>
+                <Text style={{fontSize: 20, padding: 10}}>Enter your profile information</Text>
               </View>
               <Form
               ref="form"
@@ -235,10 +219,11 @@ class AddProfile extends Component {
               onChange={this.onChange.bind(this)}
             />
             <View style={{flex: 1,alignItems: 'center', justifyContent:'center', flexDirection: 'row', marginBottom: 40}}>
-              <Button info onPress={this.onPress.bind(this)}>{this.props.type === 'Enter' ? <Text style={{fontSize: 16}}>Save</Text>:  <Text style={{fontSize: 16}}>Update</Text>}{this.state.progress && <Spinner/>}</Button>
+              <Button info onPress={this.onPress.bind(this)}><Text style={{fontSize: 16}}>Save</Text>{this.state.progress && <Spinner/>}</Button>
             </View>
           </Content>
         </Container>
+      </ScrollView>
     );
   }
 }
@@ -257,4 +242,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, bindAction)(AddProfile);
+export default connect(mapStateToProps, bindAction)(EditProfile);

@@ -3,8 +3,8 @@ import { Image, View, TouchableOpacity, Text, TextInput, ActivityIndicator } fro
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Container, Header, Left, Right, Body, Content, Button, Icon, Thumbnail, Title, List, Spinner} from 'native-base';
-import BleManager from 'react-native-ble-manager';
-console.log('blue manage', BleManager);
+const Permissions = require('react-native-permissions');
+
 
 import { openDrawer } from '../../actions/drawer';
 
@@ -30,6 +30,11 @@ class Settings extends Component {  // eslint-disable-line
   }
 
   componentWillMount() {
+    Permissions.getPermissionStatus('bluetooth')
+      .then(response => {
+        //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+        console.log(response);
+      });
   }
 
   render() {

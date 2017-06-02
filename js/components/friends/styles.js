@@ -33,7 +33,6 @@ export default {
   name: {
     fontSize: 15,
     fontWeight: 'bold',
-    marginLeft: 10,
     marginTop: 2,
   },
   noOfMutualFriends: {

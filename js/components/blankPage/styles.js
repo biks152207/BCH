@@ -43,4 +43,11 @@ export default {
     paddingLeft: 15,
     paddingRight: 15,
   },
+  data: {
+    fontSize: 16,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '600'
+  }
 };

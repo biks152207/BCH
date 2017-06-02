@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Container, Header, Content, Left, Right, Body, Button, Icon, Title, List, ListItem, Spinner } from 'native-base';
 import { openDrawer, selectTab } from '../../actions/drawer';
-import { HTTP } from '../helper/common';
+import { HTTP, getItem, setItem } from '../helper/common';
 import styles from './styles';
 
 
@@ -20,50 +20,96 @@ class Friends extends Component {  // eslint-disable-line
       userid: null,
       profileId: 0,
       tguid: null,
-      loading: false,
+      loading: true,
       message: null,
       profilesInfo: [],
       tab: 'friends',
     };
 
     this.callProfileApi = this.callProfileApi.bind(this);
+    this.viewContact = this.viewContact.bind(this);
+    this.deleteContact = this.deleteContact.bind(this);
+    this.editContact = this.editContact.bind(this);
   }
 
-  componentWillMount() {
-    const user = this.props.user;
-    this.setState({
-      loading: true,
-      tguid: user.tguid,
-      userid: user.userId,
-    });
-    this.callProfileApi();
+  editContact(contact) {
+    setItem('profile', contact);
+    this.props.selectTab('editProfile');
+  }
+
+  viewContact(data) {
+    Alert.alert(
+      'User details',
+      `Company Name: ${data.company}\n
+      Title: ${data.title}\n
+      Profile Name: ${data.profileName}\n
+      First Name: ${data.firstName}\n
+      Last Name: ${data.lastName}\n
+      Phone Office 1: ${data.phoneOffice01}\n
+      Phone Office 2: ${data.phoneOffice02}\n
+      Phone/Mobile (work): ${data.phoneMobileWork}\n
+      Phone/Mobile (personal): ${data.phoneMobilePersonal}\n
+      Work Email: ${data.emailWork}\n
+      Personal Email: ${data.emailPersonal}\n
+      `
+    )
+  }
+
+  deleteContact() {
+
+  }
+
+  componentDidMount() {
+    getItem('user')
+      .then((user) => {
+        this.setState({
+          tguid: user.tguid,
+          userid: user.userId,
+        });
+        this.callProfileApi();
+      })
   }
 
   callProfileApi() {
     const { userid, profileId, tguid } = this.state;
-    const uri = `api/profiles?userid=${userid}&profileId=${profileId}&tguid=${tguid}`;
-
+    const uri = `api/profiles?userid=${userid}&profileId=${0}&tguid=${tguid}`;
+    console.log('uri', uri);
     HTTP(uri, 'GET')
     .then(response => response.json())
     .then((responseData) => {
-      if (responseData.message === null) {
+      if (responseData && responseData.length > 0) {
         this.setState({ loading: false, profilesInfo: responseData });
-      } else {
+      }
+      else {
         this.setState({ loading: false, message: 'No profile found' });
       }
     })
-    .done();
+    .catch((error) => {
+      this.setState({ loading: false, message: 'No profile found' });
+    });
   }
 
   render() {
-    const profiles = this.state.profilesInfo.map(profile =>
-      <ListItem>
-        <View style={styles.requestContainerInner}>
-          <View>
-            <Text style={styles.name}>{profile.firstname} {profile.lastName}</Text>
-          </View>
-        </View>
-      </ListItem>
+    const profiles = this.state.profilesInfo.map((profile, key) =>{
+      return (<ListItem avatar key={key}>
+            <Left>
+                {/*<Thumbnail source={require('../../../images/cam.png')} />*/}
+                <Icon name='man' style={{fontSize: 40, width: 30}} />
+            </Left>
+            <Body>
+                <Text style={styles.name}>{profile.company}</Text>
+                <Text note>{profile.title}</Text>
+            </Body>
+            <Right>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    <Button light style={{height: 36}} onPress={() => this.editContact(profile)}><Text>Edit</Text></Button>
+                    <Button light style={{height: 36, marginLeft: 10}} onPress={() => this.viewContact(profile)}><Icon name='eye' /></Button>
+                    <Button light style={{height: 36, marginLeft: 10}} onPress={() => this.deleteContact(profile)}><Icon name='trash' /></Button>
+                </View>
+            </Right>
+        </ListItem>
+      )
+    }
     );
     return (
       <Container>
