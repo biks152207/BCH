@@ -7,7 +7,7 @@ import { Container, Header, Content, Left, Right, Body, Button, Icon, Title, Lis
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import { openDrawer, selectTab, closeDrawer } from '../../actions/drawer';
 import { HTTP, getItem, setItem } from '../helper/common';
-import BluetoothSerial from 'react-native-bluetooth-serial';
+// import BluetoothSerial from 'react-native-bluetooth-serial';
 import styles from './styles';
 
 

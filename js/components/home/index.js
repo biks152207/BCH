@@ -51,7 +51,6 @@ class Home extends Component {  // eslint-disable-line
         tab = <AddProfile type={'Update'} />
         break;
       case 'editFromShare':
-        alert('m')
         tab = <AddProfile type={'Update'} />
         break;
       case 'nearbyFriends':
