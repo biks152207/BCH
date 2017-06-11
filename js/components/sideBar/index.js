@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Container, Content, Text, Icon, List, Left, Right, Body, ListItem, Thumbnail } from 'native-base';
 import { Actions, ActionConst } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
+import FontIcon from 'react-native-vector-icons/FontAwesome';
 import { deleteItem } from '../helper/common';
 
 import { closeDrawer, selectTab } from '../../actions/drawer';
@@ -89,6 +90,7 @@ class SideBar extends Component {
                 style={styles.links}
               >
                 <Left>
+
                   <Thumbnail square size={50} source={this.props.user && this.props.user.image ? this.props.user.image: profileImg} />
                 </Left>
                 <Body style={{ borderBottomWidth: 0 }}>
@@ -108,7 +110,7 @@ class SideBar extends Component {
                 style={styles.links}
               >
                 <Left style={{width:50}}>
-                  <Thumbnail square size={50} source={profileImage} />
+                  <FontIcon name='user-circle' size={50} color='#fff'/>
                 </Left>
                 <Body style={{ borderBottomWidth: 0 }}>
                   <Text style={styles.profileName}>{'Profile Manager'}</Text>
@@ -126,7 +128,7 @@ class SideBar extends Component {
                 style={styles.links}
               >
                 <Left style={{width:50}}>
-                  <Thumbnail square size={50} source={receiveImage} />
+                  <FontIcon name='bullseye' size={50} color='#fff'/>
                 </Left>
                 <Body style={{ borderBottomWidth: 0 }}>
                   <Text style={styles.profileName}>{'Receive'}</Text>
@@ -144,7 +146,7 @@ class SideBar extends Component {
                 style={styles.links}
               >
                 <Left style={{width:50}}>
-                  <Thumbnail square size={50} source={shareImage} />
+                  <FontIcon name='share-alt' size={50} color='#fff'/>
                 </Left>
                 <Body style={{ borderBottomWidth: 0 }}>
                   <Text style={styles.profileName}>{'Share'}</Text>
@@ -162,7 +164,7 @@ class SideBar extends Component {
                 style={styles.links}
               >
                 <Left style={{width:50}}>
-                  <Thumbnail square size={50} source={contactImage} />
+                  <FontIcon name='address-book-o' size={50} color='#fff'/>
                 </Left>
                 <Body style={{ borderBottomWidth: 0 }}>
                   <Text style={styles.profileName}>{'Contacts'}</Text>
@@ -199,7 +201,7 @@ class SideBar extends Component {
                 style={styles.links}
               >
                 <Left style={{width:50}}>
-                  <Thumbnail square size={50} source={homeImage} />
+                  <FontIcon name='home' size={50} color='#fff'/>
                 </Left>
                 <Body style={{ borderBottomWidth: 0 }}>
                   <Text style={styles.profileName}>{'Home'}</Text>
@@ -217,7 +219,7 @@ class SideBar extends Component {
             style={styles.links}
           >
             <Left style={{width:50}}>
-              <Thumbnail square size={50} source={logoutImage} />
+              <FontIcon name='sign-out' size={50} color='#fff'/>
             </Left>
             <Body style={{ borderBottomWidth: 0 }}>
               <Text style={styles.profileName}>{'Logout'}</Text>

@@ -92,7 +92,7 @@ export default {
     color: '#64676C',
     position: 'absolute',
     right: 10,
-    top: 10,
+    top: 20,
   },
   smallArrowForward: {
     color: '#64676C',

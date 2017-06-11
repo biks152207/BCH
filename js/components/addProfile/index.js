@@ -235,7 +235,7 @@ class AddProfile extends Component {
               onChange={this.onChange.bind(this)}
             />
             <View style={{flex: 1,alignItems: 'center', justifyContent:'center', flexDirection: 'row', marginBottom: 40}}>
-              <Button info onPress={this.onPress.bind(this)}>{this.props.type === 'Enter' ? <Text style={{fontSize: 16}}>Save</Text>:  <Text style={{fontSize: 16}}>Update</Text>}{this.state.progress && <Spinner/>}</Button>
+              <Button style={{backgroundColor: '#3b5998', marginBottom: 10}} onPress={this.onPress.bind(this)}>{this.props.type === 'Enter' ? <Text style={{fontSize: 16, color: '#fff'}}>Save</Text>:  <Text style={{fontSize: 16, color: '#fff'}}>Update</Text>}{this.state.progress && <Spinner/>}</Button>
             </View>
           </Content>
         </Container>

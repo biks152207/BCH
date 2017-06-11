@@ -33,7 +33,7 @@ export default {
     flexDirection: 'row',
   },
   name: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 'bold',
     marginTop: 2,
   },
@@ -56,6 +56,6 @@ export default {
     backgroundColor: '#3B5A94',
   },
   content: {
-    marginBottom: (Platform.OS === 'ios') ? 0 : undefined,
+    marginBottom: (Platform.OS === 'ios') ? 0 : 70,
   },
 };

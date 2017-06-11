@@ -128,7 +128,7 @@ class Friends extends Component {  // eslint-disable-line
               </Col>
               <Col size={2}>
                 <View style={{marginTop: 15}}>
-                  {this.state.selected.indexOf(key) !== -1 &&
+                  { this.state.selected.indexOf(key) !== -1 &&
                     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                         <FontIcon style={{color: 'green', fontSize: 20}} name="check"/>
                     </View>
@@ -166,11 +166,10 @@ class Friends extends Component {  // eslint-disable-line
         </Header>
         { this.state.loading ?
           <Spinner color="#3B5998" /> :
-          <ScrollView>
             <Content style={styles.content}>
               <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', marginTop: 10}}>
                 <Button transparent onPress={() => this.props.selectTab('addProfile')}>
-                  <Icon style={styles.addBtn} name="add" /><Text>ADD</Text>
+                  <Icon style={styles.addBtn} name="add" /><Text style={{ fontWeight: 'bold'}}>ADD</Text>
                 </Button>
               </View>
               <View style={styles.requestContainer}>
@@ -185,7 +184,6 @@ class Friends extends Component {  // eslint-disable-line
                 }
               </View>
             </Content>
-          </ScrollView>
         }
       </Container>
     );
