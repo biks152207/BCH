@@ -3,9 +3,10 @@ import { Image, View, TouchableOpacity, Text, TextInput, ActivityIndicator,
   Platform} from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { Container, Header, Left, Right, Body, Content, Button, Icon, Thumbnail, Title, List, Spinner} from 'native-base';
+import { Container, Header, Left, Right, Body, Content, Button, Icon, Thumbnail, Title, List, Spinner, Card, CardItem} from 'native-base';
 import {BleManager, LogLevel} from 'react-native-ble-plx';
-import { openDrawer } from '../../actions/drawer';
+import { Col, Row, Grid } from "react-native-easy-grid";
+import { openDrawer, selectTab } from '../../actions/drawer';
 
 import styles from './styles';
 import data from './data';
@@ -53,37 +54,43 @@ class Settings extends Component {  // eslint-disable-line
   render() {
     return (
       <Container style={{ backgroundColor: '#fff' }}>
-        <Header>
-          <Left>
-            <Button transparent onPress={() => Actions.pop()}>
-              <Icon style={styles.backBtn} active name="arrow-back" />
-            </Button>
-          </Left>
-          <Body style={{ flex: 1.5 }}>
-            <Title style={styles.header}>Search Device</Title>
-          </Body>
-          <Right>
-            <Button transparent onPress={this.props.openDrawer}>
-              <Image source={chatContactsImg} style={{ resizeMode: 'contain', height: 30, width: 30 }} />
-            </Button>
-          </Right>
-        </Header>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => this.props.selectTab('homeContent')}>
+            <Icon style={styles.backBtn} name="arrow-back" /><Text style={{color: 'white', marginLeft: 5}}>Back</Text>
+          </Button>
+        </Left>
+        <Body style={{ flex: 1.5 }}>
+          <Title style={styles.header}>Search Device</Title>
+        </Body>
+      </Header>
         <Content style={styles.content}>
-
-          <View style={styles.largeDivider}>
-            <Text>Scan nearby device</Text>
-          </View>
-
+          <Card style={{marginTop: 10, marginLeft: 15, marginRight: 15}}>
+            <CardItem>
+              <Grid>
+                <Col size={1}>
+                  <Thumbnail source={require('../../../images/profile.png')} style={{ marginTop: 20}}/>
+                </Col>
+                <Col size={2} style={{ marginTop: 20}}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 18}}>{this.props.user.firstName} {this.props.user.lastName}</Text>
+                  <Text>{this.props.user.email}</Text>
+                </Col>
+                <Col size={1}>
+                  <Button full style={{backgroundColor: '#3b5998'}} onPress={() => this.editContact(profile)}><Text style={{color: '#fff'}}>Edit</Text></Button>
+                  <Button full style={{marginTop: 10, backgroundColor: '#E53A40'}}  onPress={() => this.deleteContact(profile)}><Icon name='trash' style={{color: '#fff'}}/></Button>
+                </Col>
+              </Grid>
+            </CardItem>
+          </Card>
           <View style={styles.scannerContainer}>
             <Button style={styles.scannerButton} onPress={() => this.scanAndConnect()}>
                 <Icon name='bluetooth' style={{color: 'white', fontSize: 20, fontWeight: '800'}}/>
                 <Text style={{color: 'white', fontSize: 20}}>Scan</Text>
-                <Spinner color="red"/>
             </Button>
           </View>
 
           <View style={styles.largeDivider}>
-            <Text>NEARBY</Text>
+            <Text>DEVICES NEARBY</Text>
           </View>
 
           <View style={{flex: 1}}>
@@ -101,38 +108,6 @@ class Settings extends Component {  // eslint-disable-line
             }
             />
           </View>
-
-
-          {/*<View style={styles.smallDivider}>
-            <Text style={{ alignSelf: 'center', color: 'rgba(0,0,0,0.3)' }}>See More</Text>
-          </View>
-
-          <View style={styles.largeDivider}>
-            <Text>Friends Travelling</Text>
-          </View>
-
-          <TouchableOpacity style={styles.nameContainer}>
-            <Thumbnail circle size={60} source={lamborghini} />
-            <View style={{ marginTop: 8 }}>
-              <Text style={styles.userName}>Ferrucio Lamborghini</Text>
-              <Text style={styles.viewProfileText}>Italy, 1 day</Text>
-            </View>
-            <Icon active name="hand" style={styles.arrowForward} />
-          </TouchableOpacity>
-          <List
-            dataArray={data}
-            renderRow={dataRow =>
-              <TouchableOpacity style={styles.nameContainer}>
-                <Thumbnail circle size={60} source={dataRow.image} />
-                <View style={{ marginTop: 8 }}>
-                  <Text style={styles.userName}>{dataRow.name}</Text>
-                  <Text style={styles.viewProfileText}>{dataRow.note}</Text>
-                </View>
-                <Icon active name="hand" style={styles.arrowForward} />
-              </TouchableOpacity>
-              }
-          />*/}
-
         </Content>
       </Container>
     );
@@ -142,8 +117,13 @@ class Settings extends Component {  // eslint-disable-line
 function bindAction(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),
+    selectTab: newTab => dispatch(selectTab(newTab)),
   };
 }
 
+const mapStateToProps = state => ({
+  user: state.user.user
+});
 
-export default connect(null, bindAction)(Settings);
+
+export default connect(mapStateToProps, bindAction)(Settings);

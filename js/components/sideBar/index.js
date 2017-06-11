@@ -14,29 +14,8 @@ import { logout } from '../../actions/userActionCreator';
 
 const profileImg = require('../../../images/profile.png');
 const locationImg = require('../../../images/nearby.png');
-const homeImage = require('../../../images/home.png');
-const profileImage = require('../../../images/profiles.png');
-const logoutImage = require('../../../images/logout.png');
-const receiveImage = require('../../../images/receive.png');
-const shareImage = require('../../../images/shares.png');
-const contactImage = require('../../../images/contacts.png');
 
 
-
-const userData = [
-  {
-    thumbnail: profileImg,
-    name: 'Aditya Thakur',
-    content: 'View Profile',
-    link: 'profile',
-  },
-  {
-    thumbnail: locationImg,
-    name: 'Aditya Thakur',
-    content: 'Who is near you',
-    link: 'nearbyFriends',
-  },
-];
 class SideBar extends Component {
   constructor(props) {
     super(props);
@@ -55,17 +34,6 @@ class SideBar extends Component {
     Actions.login({
       type: ActionConst.RESET
     });
-  }
-
-  componentDidMount() {
-    // const user = {
-    //   name: this.props.user.firstName,
-    //   content: 'View Profile',
-    //   thumbnail: this.props.user.image ? this.props.user.image : profileImg,
-    //   link:'nearbyFriends'
-    // }
-    // this.setState({user: [user, ...this.state.user]});
-    // console.log(this.state.user, 'user....');
   }
 
   routeCall(data) {
@@ -142,7 +110,7 @@ class SideBar extends Component {
               <ListItem
                 button
                 thumbnail
-                onPress={() =>{ this.props.selectTab('friends'); this.props.closeDrawer()}}
+                onPress={() =>{ this.props.selectTab('nearbyFriends'); this.props.closeDrawer()}}
                 style={styles.links}
               >
                 <Left style={{width:50}}>

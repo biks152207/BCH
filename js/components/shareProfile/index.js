@@ -36,18 +36,6 @@ class ShareProfile extends Component {
       .then((profiles) => {
         this.setState({profiles})
       });
-    // BluetoothSerial.on('bluetoothEnabled', () => Toast.show({
-    //   supportedOrientations: ['potrait','landscape'],
-    //   text: 'Bluetooth is enabled',
-    //   position: 'bottom',
-    //   buttonText: 'Okay'
-    // }));
-    // BluetoothSerial.on('bluetoothDisabled', () => Toast.show({
-    //   supportedOrientations: ['potrait','landscape'],
-    //   text: 'Bluetooth is disabled',
-    //   position: 'bottom',
-    //   buttonText: 'Okay'
-    // }))
   }
   render() {
     const profiles = this.state.profiles.map((profile, key) =>{
@@ -63,10 +51,10 @@ class ShareProfile extends Component {
                 <Text>{profile.title}</Text>
               </Col>
               <Col size={1}>
-                <Button full light onPress={() => this.editContact(profile)}>
-                  <Text>Edit</Text>
+                <Button full style={{backgroundColor: '#3b5998'}} onPress={() => this.editContact(profile)}>
+                  <Text style={{color: '#fff'}}>Edit</Text>
                 </Button>
-                <Button full light style={{marginTop: 10, backgroundColor: '#E53A40'}}  onPress={() => this.deleteContact(profile)}>
+                <Button full style={{marginTop: 10, backgroundColor: '#E53A40'}}  onPress={() => this.deleteContact(profile)}>
                   <Icon style={{color: '#fff'}} name='trash' />
                 </Button>
               </Col>

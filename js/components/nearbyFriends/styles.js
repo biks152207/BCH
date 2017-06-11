@@ -88,5 +88,7 @@ export default {
     height: 100
   },
   scannerButton: {
+    marginTop: 20,
+    backgroundColor: '#3b5998',
   }
 };
