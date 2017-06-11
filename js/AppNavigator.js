@@ -22,6 +22,7 @@ import SideBar from './components/sideBar';
 import AddProfile from './components/addProfile';
 import { statusBarColor } from './themes/base-theme';
 import EditProfile from './components/editProfile';
+import ShareProfile from './components/shareProfile';
 const statusBarClr = color('#3B5998').darken(0.3).hexString();
 
 const RouterWithRedux = connect()(Router);
@@ -107,6 +108,7 @@ class AppNavigator extends Component {
             <Scene key="blankPage" component={BlankPage} />
             <Scene key="addProfile" component={AddProfile} />
             <Scene key="editProfile" component={EditProfile} />
+            <Scene key="shareProfile" component={ShareProfile} />
           </Scene>
         </RouterWithRedux>
 

@@ -6,12 +6,21 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 import { deleteItem } from '../helper/common';
 
-import { closeDrawer } from '../../actions/drawer';
+import { closeDrawer, selectTab } from '../../actions/drawer';
+
 import styles from './style';
 import { logout } from '../../actions/userActionCreator';
 
 const profileImg = require('../../../images/profile.png');
 const locationImg = require('../../../images/nearby.png');
+const homeImage = require('../../../images/home.png');
+const profileImage = require('../../../images/profiles.png');
+const logoutImage = require('../../../images/logout.png');
+const receiveImage = require('../../../images/receive.png');
+const shareImage = require('../../../images/shares.png');
+const contactImage = require('../../../images/contacts.png');
+
+
 
 const userData = [
   {
@@ -80,11 +89,11 @@ class SideBar extends Component {
                 style={styles.links}
               >
                 <Left>
-                  <Thumbnail square size={50} source={this.props.user.image ? this.props.user.image: profileImg} />
+                  <Thumbnail square size={50} source={this.props.user && this.props.user.image ? this.props.user.image: profileImg} />
                 </Left>
                 <Body style={{ borderBottomWidth: 0 }}>
-                  <Text style={styles.profileName}>{this.props.user.firstName ?this.props.user.firstName: '' }</Text>
-                  <Text style={styles.viewProfileLink}>{'View Profile'}</Text>
+                  <Text style={styles.profileName}>{this.props.user && this.props.user.firstName ?this.props.user.firstName: '' }</Text>
+                  <Text style={styles.viewProfileLink}>{'Profile'}</Text>
                 </Body>
                 <Right style={{ borderBottomWidth: 0, paddingLeft: 5 }}>
                   <Icon name="arrow-forward" style={styles.arrowForward} />
@@ -92,6 +101,78 @@ class SideBar extends Component {
               </ListItem>
           </List>
           <List>
+              <ListItem
+                button
+                thumbnail
+                onPress={() =>{ this.props.selectTab('friends'); this.props.closeDrawer()}}
+                style={styles.links}
+              >
+                <Left style={{width:50}}>
+                  <Thumbnail square size={50} source={profileImage} />
+                </Left>
+                <Body style={{ borderBottomWidth: 0 }}>
+                  <Text style={styles.profileName}>{'Profile Manager'}</Text>
+                </Body>
+                <Right style={{ borderBottomWidth: 0, paddingLeft: 5 }}>
+                  <Icon name="arrow-forward" style={styles.arrowForward} />
+                </Right>
+              </ListItem>
+          </List>
+          <List>
+              <ListItem
+                button
+                thumbnail
+                onPress={() =>{ this.props.selectTab('friends'); this.props.closeDrawer()}}
+                style={styles.links}
+              >
+                <Left style={{width:50}}>
+                  <Thumbnail square size={50} source={receiveImage} />
+                </Left>
+                <Body style={{ borderBottomWidth: 0 }}>
+                  <Text style={styles.profileName}>{'Receive'}</Text>
+                </Body>
+                <Right style={{ borderBottomWidth: 0, paddingLeft: 5 }}>
+                  <Icon name="arrow-forward" style={styles.arrowForward} />
+                </Right>
+              </ListItem>
+          </List>
+          <List>
+              <ListItem
+                button
+                thumbnail
+                onPress={() =>{ this.props.selectTab('friends'); this.props.closeDrawer()}}
+                style={styles.links}
+              >
+                <Left style={{width:50}}>
+                  <Thumbnail square size={50} source={shareImage} />
+                </Left>
+                <Body style={{ borderBottomWidth: 0 }}>
+                  <Text style={styles.profileName}>{'Share'}</Text>
+                </Body>
+                <Right style={{ borderBottomWidth: 0, paddingLeft: 5 }}>
+                  <Icon name="arrow-forward" style={styles.arrowForward} />
+                </Right>
+              </ListItem>
+          </List>
+          <List>
+              <ListItem
+                button
+                thumbnail
+                onPress={() =>{ this.props.selectTab('homeContent'); this.props.closeDrawer()}}
+                style={styles.links}
+              >
+                <Left style={{width:50}}>
+                  <Thumbnail square size={50} source={contactImage} />
+                </Left>
+                <Body style={{ borderBottomWidth: 0 }}>
+                  <Text style={styles.profileName}>{'Contacts'}</Text>
+                </Body>
+                <Right style={{ borderBottomWidth: 0, paddingLeft: 5 }}>
+                  <Icon name="arrow-forward" style={styles.arrowForward} />
+                </Right>
+              </ListItem>
+          </List>
+          {/*<List>
               <ListItem
                 button
                 thumbnail
@@ -109,43 +190,42 @@ class SideBar extends Component {
                   <Icon name="arrow-forward" style={styles.arrowForward} />
                 </Right>
               </ListItem>
+          </List>*/}
+          <List>
+              <ListItem
+                button
+                thumbnail
+                onPress={() => {Actions.home();  this.props.closeDrawer();}}
+                style={styles.links}
+              >
+                <Left style={{width:50}}>
+                  <Thumbnail square size={50} source={homeImage} />
+                </Left>
+                <Body style={{ borderBottomWidth: 0 }}>
+                  <Text style={styles.profileName}>{'Home'}</Text>
+                </Body>
+                <Right style={{ borderBottomWidth: 0, paddingLeft: 5 }}>
+                  <Icon name="arrow-forward" style={styles.arrowForward} />
+                </Right>
+              </ListItem>
           </List>
-          <View style={styles.favHead}>
-            <Text style={styles.favText}>OPTIONS</Text>
-          </View>
-          <List foregroundColor={'white'} >
-            {/*<ListItem
-              button iconLeft
-              onPress={() => { Actions.userSettings(); this.props.closeDrawer(); }}
-              style={styles.links}
-            >
-              <Icon name="settings" style={{ color: '#fff' }} />
-              <Text style={styles.linkText}>SETTINGS</Text>
-            </ListItem>*/}
-            <ListItem
-              button iconLeft
-              onPress={() => { Actions.home(); this.props.closeDrawer(); }}
-              style={styles.links}
-            >
-              <Icon name="ios-grid-outline" style={{ color: '#fff' }} />
-              <Text style={styles.linkText} >HOME</Text>
-            </ListItem>
-            {/*<ListItem
-              button iconLeft
-              onPress={() => { Actions.blankPage(); this.props.closeDrawer(); }}
-              style={styles.links}
-            >
-              <Icon name="ios-keypad-outline" style={{ color: '#fff' }} />
-              <Text style={styles.linkText}>BLANK PAGE</Text>
-            </ListItem>*/}
-            <ListItem
-              button iconLeft
-              onPress={() => { this.logoutUser(); this.props.closeDrawer(); }}
-              style={styles.links}
-            >
-              <Icon name="power" style={{ color: '#fff' }} />
-              <Text style={styles.linkText}>LOG OUT</Text>
-            </ListItem>
+          <List >
+          <ListItem
+            button
+            thumbnail
+            onPress={() => { this.logoutUser(); this.props.closeDrawer(); }}
+            style={styles.links}
+          >
+            <Left style={{width:50}}>
+              <Thumbnail square size={50} source={logoutImage} />
+            </Left>
+            <Body style={{ borderBottomWidth: 0 }}>
+              <Text style={styles.profileName}>{'Logout'}</Text>
+            </Body>
+            <Right style={{ borderBottomWidth: 0, paddingLeft: 5 }}>
+              {/*<Icon name="arrow-forward" style={styles.arrowForward} />*/}
+            </Right>
+          </ListItem>
           </List>
         </Content>
       </Container>
@@ -156,7 +236,8 @@ class SideBar extends Component {
 function bindAction(dispatch) {
   return {
     closeDrawer: () => dispatch(closeDrawer()),
-    logout: bindActionCreators(logout, dispatch)
+    logout: bindActionCreators(logout, dispatch),
+    selectTab: bindActionCreators(selectTab, dispatch),
   };
 }
 

@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { Image, View, TouchableOpacity, Text, TextInput, ActivityIndicator } from 'react-native';
+import { Image, View, TouchableOpacity, Text, TextInput, ActivityIndicator,
+  Platform} from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Container, Header, Left, Right, Body, Content, Button, Icon, Thumbnail, Title, List, Spinner} from 'native-base';
-const Permissions = require('react-native-permissions');
-
-
+import {BleManager, LogLevel} from 'react-native-ble-plx';
 import { openDrawer } from '../../actions/drawer';
 
 import styles from './styles';
 import data from './data';
+
+
 
 const primary = require('../../themes/variable').brandPrimary;
 
@@ -26,16 +27,28 @@ class Settings extends Component {  // eslint-disable-line
 
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = { text: ''};
+    this.manager = new BleManager();
+    this.manager.setLogLevel(LogLevel.Verbose);
+    this.scan = this.scan.bind(this);
+    this.error = this.error.bind(this);
+    this.scanAndConnect = this.scanAndConnect.bind(this);
   }
 
-  componentWillMount() {
-    Permissions.getPermissionStatus('bluetooth')
-      .then(response => {
-        //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-        console.log(response);
-      });
+  scanAndConnect() {
+    this.manager.startDeviceScan(null, null, (error, device) => {
+      alert(device);
+      alert(JSON.stringify(device));
+    })
   }
+
+  error(err) {
+    alert(err);
+  }
+
+  scan() {
+  }
+
 
   render() {
     return (
@@ -62,10 +75,10 @@ class Settings extends Component {  // eslint-disable-line
           </View>
 
           <View style={styles.scannerContainer}>
-            <Button style={styles.scannerButton}>
-                <Icon name='home' style={{color: 'white', fontSize: 20, fontWeight: '800'}}/>
+            <Button style={styles.scannerButton} onPress={() => this.scanAndConnect()}>
+                <Icon name='bluetooth' style={{color: 'white', fontSize: 20, fontWeight: '800'}}/>
                 <Text style={{color: 'white', fontSize: 20}}>Scan</Text>
-                <Spinner color="#fff"/>
+                <Spinner color="red"/>
             </Button>
           </View>
 

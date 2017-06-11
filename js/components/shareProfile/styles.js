@@ -11,7 +11,7 @@ export default {
     color: '#fff',
   },
   addBtn: {
-    color: 'black',
+    color: '#fff',
   },
   requestHead: {
     color: '#53565F',
@@ -26,7 +26,6 @@ export default {
     fontWeight: 'bold',
     fontSize: 18,
     padding: 15,
-    textAlign: 'center'
   },
   requestContainerInner: {
     flexDirection: 'row',

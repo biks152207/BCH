@@ -71,6 +71,10 @@ class HomeContent extends Component {  // eslint-disable-line
     const { userid, profileId, tguid } = this.state;
     const uri = `api/contacts?userid=${userid}&profileId=${profileId}&tguid=${tguid}`;
     const response = await HTTP(uri, 'GET');
+    if (response.status === 404) {
+      this.setState({ loading: false, message: 'No contacts found' });
+      return;
+    }
     const actualResponse = await response.json();
     if (actualResponse && actualResponse.length > 0) {
       this.setState({ loading: false, contactsInfo: actualResponse });

@@ -1,10 +1,12 @@
-package com.bhc;
+package com.bch;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
+import com.rusel.RCTBluetoothSerial.RCTBluetoothSerialPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
+import com.polidea.reactnativeble.BlePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -25,8 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RCTBluetoothSerialPackage(),
+            new VectorIconsPackage(),
             new ReactNativePermissionsPackage(),
-            new VectorIconsPackage()
+            new BlePackage()
       );
     }
   };
