@@ -1097,7 +1097,7 @@ buffer-shims@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/buffer-shims/-/buffer-shims-1.0.0.tgz#9978ce317388c649ad8793028c3477ef044a8b51"
 
-buffer@^4.6.0, buffer@^4.9.1:
+buffer@^4.6.0:
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
   dependencies:
@@ -5041,24 +5041,9 @@ react-native-animatable@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.2.0.tgz#fd279c6ee4b49161c6cc3b951ed7765b35a73467"
 
-react-native-ble-connect@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-ble-connect/-/react-native-ble-connect-1.0.5.tgz#184ea9428d6d46ead316feee0badfab69b5df142"
-
-react-native-ble-manager@^5.0.2:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-ble-manager/-/react-native-ble-manager-5.0.3.tgz#5dae5ad2b9bc47881bf1191198d17330ee473c31"
-
 react-native-ble-plx@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/react-native-ble-plx/-/react-native-ble-plx-0.5.0.tgz#b6d40db3d63b47a758a3b25890fa6ba7f80b05b6"
-
-react-native-bluetooth-manager@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-bluetooth-manager/-/react-native-bluetooth-manager-0.5.0.tgz#68558c037c021ae31a8c0f44c4225ca17dca4bea"
-  dependencies:
-    buffer "^4.9.1"
-    lodash "^4.15.0"
 
 react-native-bluetooth-serial@^1.0.0-rc1:
   version "1.0.0-rc1"
@@ -5134,13 +5119,7 @@ react-native-keyboard-aware-scroll-view@0.2.7:
   dependencies:
     react-timer-mixin "^0.13.3"
 
-react-native-lightbox@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-lightbox/-/react-native-lightbox-0.6.0.tgz#291701fb3dd0d7eaf88cebb5f105d7891bea5452"
-  dependencies:
-    react-timer-mixin "^0.13.3"
-
-react-native-lightbox@oblador/react-native-lightbox#c84a8543d4511fe6a44c3d7820747c9c1bddd875:
+react-native-lightbox@^0.6.0, react-native-lightbox@oblador/react-native-lightbox#c84a8543d4511fe6a44c3d7820747c9c1bddd875:
   version "0.6.0"
   resolved "https://codeload.github.com/oblador/react-native-lightbox/tar.gz/c84a8543d4511fe6a44c3d7820747c9c1bddd875"
   dependencies:

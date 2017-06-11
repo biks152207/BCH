@@ -9,6 +9,7 @@ export default {
   },
   header: {
     color: '#fff',
+    marginLeft: (Platform.OS === 'ios') ? undefined : 20,
   },
   addBtn: {
     color: 'black',

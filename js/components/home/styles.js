@@ -167,6 +167,7 @@ export default {
    fontSize: 15,
    fontWeight: 'bold',
    marginTop: 2,
+   marginLeft: 20,
  },
  noOfMutualFriends: {
    color: '#525463',
