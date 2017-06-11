@@ -9,6 +9,7 @@ export default {
   },
   header: {
     color: '#fff',
+    marginLeft: 10
   },
   addBtn: {
     color: '#fff',

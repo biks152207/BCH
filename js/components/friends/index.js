@@ -139,7 +139,7 @@ class Friends extends Component {  // eslint-disable-line
               </Col>
               <Col size={1}>
                 <Button full light onPress={() => this.editContact(profile)}><Text>Edit</Text></Button>
-                <Button full light style={{marginTop: 4, backgroundColor: '#E53A40'}}  onPress={() => this.deleteContact(profile)}><Icon name='trash' style={{color: '#fff'}}/></Button>
+                <Button full light style={{marginTop: 10, backgroundColor: '#E53A40'}}  onPress={() => this.deleteContact(profile)}><Icon name='trash' style={{color: '#fff'}}/></Button>
               </Col>
             </Grid>
           </CardItem>
