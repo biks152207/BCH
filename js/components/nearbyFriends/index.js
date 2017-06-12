@@ -93,7 +93,7 @@ class Settings extends Component {  // eslint-disable-line
             <Text>DEVICES NEARBY</Text>
           </View>
 
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, marginBottom: 70}}>
             <List
             dataArray={data}
             renderRow={dataRow =>

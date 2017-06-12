@@ -92,7 +92,7 @@ class SideBar extends Component {
               <ListItem
                 button
                 thumbnail
-                onPress={() =>{ this.props.selectTab('friends'); this.props.closeDrawer()}}
+                onPress={() =>{ this.props.selectTab('chat'); this.props.closeDrawer()}}
                 style={styles.links}
               >
                 <Left style={{width:50}}>
